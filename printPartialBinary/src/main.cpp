@@ -3,6 +3,10 @@
  *
  *  Created on: Nov 27, 2021
  *      Author: Gyy
+ *      Program get list of files and read binary data and sdout it from all files what is in that specified folder
+ *      This program was created for SecureBug CTF where was multiple images and in every image header was one char
+ *      of the flag. Spaces in filenames and directories might make program behave strange.
+ *      TO-DO what order files want to parse
  */
 #include <string>
 #include <iostream>
