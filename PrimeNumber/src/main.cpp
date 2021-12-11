@@ -3,6 +3,7 @@
  *
  *  Created on: Dec 11, 2021
  *      Author: Gyy
+ *      usage nc challs.xmas.htsp.ro 5006 | ./PrimeNumber
  */
 
 

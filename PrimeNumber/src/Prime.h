@@ -14,12 +14,17 @@
 #include <stdint.h>
 #include <sstream>
 #include <unistd.h>
+#include <sys/types.h>
+
+#include <fstream>
 class Prime {
 public:
 	Prime();
+
 	~Prime();
 	void runProgram();
 private:
+
 	std::list<long long int> primenum;
 	std::list<long long int> notprime;
 	std::list<long long int> nthpos;

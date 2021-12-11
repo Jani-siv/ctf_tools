@@ -80,19 +80,11 @@ else if (data.find(queries_line) == 0)
 }
 else if (data.find(answer_line) == 0)
 {
-	//this->giveAnswer();
+
 }
 }
-/*
- * Loading drivers...
-You will have to solve 10 tests in at most 120 seconds. Good luck!
-Step: #1 out of 10!
-N = 10
-K = 2
-numbers = [1037320, 4892335, 1265657, 4390968, 880819, 4026859, 3564017, 237108, 1973064, 3626563]
-queries = [21, 10]
-answers = Some responses are incorrect. Better luck next time!
- */
+
+
 int Prime::parseString(std::string data, std::string delimiter)
 {
 	size_t pos = 0;
@@ -165,6 +157,9 @@ void Prime::giveAnswer()
 
 
 	answer.replace(answer.length()-1,1,"]");
+	std::ofstream fd("answer.log",std::ios::ate);
+	fd << answer;
+	fd.close();
 	std::cout<<"answer: "<<answer<<std::endl;
 this->deletaAllLists();
 }
