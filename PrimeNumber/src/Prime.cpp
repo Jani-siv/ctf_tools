@@ -182,7 +182,25 @@ bool Prime::testPrime(long long int value)
 	{
 		return false;
 	}
+    if (value==2 || value == 3)
+    {
+        return true;
+    }
+    else {
+        if (value <=1 || value % 2 == 0 || value % 3 == 0){
+            return false;
+            }
 
+        for (int i =5; i*i <= value; i+=6){
+            if (value % i == 0 || value % (i+2) == 0){
+                return false;
+            }
+        }
+    }
+    return true;
+
+
+	/*
 	    if (value == 0 || value == 1) {
 	        return false;
 	    }
@@ -195,6 +213,6 @@ bool Prime::testPrime(long long int value)
 	    }
 
 	    return true;
-
+*/
 	return answer;
 }
