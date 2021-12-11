@@ -13,7 +13,8 @@
 int main(int argc, char *argv[])
 {
 Prime pri;
-pri.runProgram();
+pri.createRestPrimenum();
+//pri.runProgram();
 
 	return 0;
 

@@ -13,11 +13,14 @@ std::ifstream fd("primeNum.log", std::ios::in);
 std::string str;
 if (fd.is_open())
 {
+	int i = 0;
  while (std::getline(fd, str))
  {
      this->savedPri.push_back(stoi(str));
+     i++;
  }
  fd.close();
+ std::cout<<"Loaded " <<i<<" amount of prime numbers in memory"<<std::endl;
 }
 else
 {
@@ -25,6 +28,83 @@ else
 	fd << 2;
 	fd << '\n';
 	fd.close();
+}
+std::ifstream fd1("NotprimeNum.log", std::ios::in);
+if (fd1.is_open())
+{
+	int p = 0;
+ while (std::getline(fd1, str))
+ {
+     this->savedNotPri.push_back(stoi(str));
+     p++;
+ }
+ fd.close();
+ std::cout<<"Loaded " <<p<<" amount of prime numbers in memory"<<std::endl;
+}
+else
+{
+	std::ofstream fd1("NotprimeNum.log", std::ios::ate);
+	fd1 << 1;
+	fd1 << 0;
+	fd1 << '\n';
+	fd1.close();
+}
+
+
+
+}
+
+void Prime::createRestPrimenum()
+{
+this->savedPri.sort();
+long long int numero= 0;
+for (auto it = this->savedPri.begin(); it != this->savedPri.end(); it++)
+{
+	long long int temp = it.operator *();
+	if (temp > numero)
+	{
+		numero = temp;
+	}
+}
+std::cout<<"numero on: "<<numero<<std::endl;
+while(numero > 2)
+{
+	auto it = std::find(this->savedPri.begin(),this->savedPri.end(),numero);
+	if (it == this->savedPri.end())
+	{
+		//lasketaan prinum
+		bool answer = true;
+		/*test from list*/
+		if ((numero & (1 << 0)) == 0 )
+		{
+			answer = false;
+		}
+		else if (numero==2 || numero == 3)
+	    {
+	        answer = true;
+	    }
+	    else {
+	        if (numero <=1 || numero % 2 == 0 || numero % 3 == 0){
+	            answer = false;
+	            }
+
+	        for (int i =5; i*i <= numero; i+=6){
+	            if (numero% i == 0 || numero % (i+2) == 0){
+	                answer = false;
+	            }
+	        }
+	    }
+
+	    if (answer == true)
+	    {
+	    	std::cout<<"found new number: "<<numero<<std::endl;
+	    	std::ofstream fd("primeNum.log", std::ios::app);
+	    	fd << std::to_string(numero);
+	    	fd << '\n';
+	    	fd.close();
+	    }
+	}
+	numero--;
 }
 }
 
@@ -176,6 +256,8 @@ void Prime::giveAnswer()
 	std::ofstream fd("answer.log",std::ios::ate);
 	fd << answer;
 	fd.close();
+	std::string com ="echo \"" + answer + "\"";
+	system(com.c_str());
 	std::cout<<"answer: "<<answer<<std::endl;
 this->deletaAllLists();
 }
@@ -198,6 +280,25 @@ std::ofstream fd("primeNum.log", std::ios::app);
 		}
 	}
 	fd.close();
+	std::ofstream fd1("NotprimeNum.log", std::ios::app);
+
+		for (auto i = this->notprime.begin(); i != this->notprime.end(); i++)
+		{
+			long long int temp = i.operator *();
+			auto it = std::find(this->savedNotPri.begin(),this->savedNotPri.end(),temp);
+			if (it == this->savedNotPri.end())
+			{
+				fd1 << std::to_string(temp);
+				fd1 << '\n';
+				this->savedNotPri.push_back(temp);
+			}
+		}
+		fd1.close();
+
+
+	std::cout<<"last run found: "<<this->found<<" prime numbers from file"<<std::endl;
+	std::cout<<"last run found: "<<this->foundNot<<" not prime num"<<std::endl;
+	std::cout<<"total calculations: "<<this->totalCalc<<std::endl;
 	this->testdata.erase(this->testdata.begin(),this->testdata.end());
 	this->primenum.erase(this->primenum.begin(),this->primenum.end());
 	this->nthpos.erase(this->nthpos.begin(),this->nthpos.end());
@@ -206,13 +307,23 @@ std::ofstream fd("primeNum.log", std::ios::app);
 
 bool Prime::testPrime(long long int value)
 {
-
+this->totalCalc++;
 	auto it = std::find(this->savedPri.begin(), this->savedPri.end(),value);
 		{
 		if (it != this->savedPri.end())
-		{
+			{
+			this->found++;
 			return true;
+			}
 		}
+
+	auto it1 = std::find(this->savedNotPri.begin(), this->savedNotPri.end(),value);
+		{
+		if (it1 != this->savedNotPri.end())
+			{
+			this->foundNot++;
+			return false;
+			}
 		}
 	bool answer = true;
 	/*test from list*/

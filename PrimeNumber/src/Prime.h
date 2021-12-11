@@ -24,12 +24,17 @@ public:
 
 	~Prime();
 	void runProgram();
+	void createRestPrimenum();
 private:
 	std::list<long long int> savedPri;
+	std::list<long long int> savedNotPri;
 	std::list<long long int> primenum;
 	std::list<long long int> notprime;
 	std::list<long long int> nthpos;
 	std::list<long long int> testdata;
+	int found = 0;
+	int foundNot = 0;
+	int totalCalc = 0;
 	void parsePos(std::string data, std::string delimiter);
 	void giveAnswer();
 	void selectParsing(std::string data);
