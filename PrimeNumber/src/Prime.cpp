@@ -9,7 +9,23 @@
 
 Prime::Prime() {
 	// TODO Auto-generated constructor stub
-
+std::ifstream fd("primeNum.log", std::ios::in);
+std::string str;
+if (fd.is_open())
+{
+ while (std::getline(fd, str))
+ {
+     this->savedPri.push_back(stoi(str));
+ }
+ fd.close();
+}
+else
+{
+	std::ofstream fd("primeNum.log", std::ios::ate);
+	fd << 2;
+	fd << '\n';
+	fd.close();
+}
 }
 
 Prime::~Prime() {
@@ -168,6 +184,20 @@ this->deletaAllLists();
 
 void Prime::deletaAllLists()
 {
+std::ofstream fd("primeNum.log", std::ios::app);
+
+	for (auto i = this->primenum.begin(); i != this->primenum.end(); i++)
+	{
+		long long int temp = i.operator *();
+		auto it = std::find(this->savedPri.begin(),this->savedPri.end(),temp);
+		if (it == this->savedPri.end())
+		{
+			fd << std::to_string(temp);
+			fd << '\n';
+			this->savedPri.push_back(temp);
+		}
+	}
+	fd.close();
 	this->testdata.erase(this->testdata.begin(),this->testdata.end());
 	this->primenum.erase(this->primenum.begin(),this->primenum.end());
 	this->nthpos.erase(this->nthpos.begin(),this->nthpos.end());
@@ -176,6 +206,14 @@ void Prime::deletaAllLists()
 
 bool Prime::testPrime(long long int value)
 {
+
+	auto it = std::find(this->savedPri.begin(), this->savedPri.end(),value);
+		{
+		if (it != this->savedPri.end())
+		{
+			return true;
+		}
+		}
 	bool answer = true;
 	/*test from list*/
 	if ((value & (1 << 0)) == 0 )

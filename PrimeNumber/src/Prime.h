@@ -17,6 +17,7 @@
 #include <sys/types.h>
 #define CHECK_BIT(var,pos) ((var) & (1<<(pos)))
 #include <fstream>
+#include <algorithm>
 class Prime {
 public:
 	Prime();
@@ -24,6 +25,7 @@ public:
 	~Prime();
 	void runProgram();
 private:
+	std::list<long long int> savedPri;
 	std::list<long long int> primenum;
 	std::list<long long int> notprime;
 	std::list<long long int> nthpos;
