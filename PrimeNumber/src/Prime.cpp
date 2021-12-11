@@ -165,7 +165,7 @@ void Prime::giveAnswer()
 
 
 	answer.replace(answer.length()-1,1,"]");
-	std::cout<<answer<<'\r'<<'\n'<<std::endl;
+	std::cout<<"answer: "<<answer<<std::endl;
 this->deletaAllLists();
 }
 
@@ -174,11 +174,9 @@ void Prime::deletaAllLists()
 	this->testdata.erase(this->testdata.begin(),this->testdata.end());
 	this->primenum.erase(this->primenum.begin(),this->primenum.end());
 	this->nthpos.erase(this->nthpos.begin(),this->nthpos.end());
+	this->notprime.erase(this->notprime.begin(),this->notprime.end());
 }
-void Prime::checkList(long long int value)
-{
 
-}
 bool Prime::testPrime(long long int value)
 {
 	bool answer = true;

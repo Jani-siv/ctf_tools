@@ -28,7 +28,6 @@ private:
 	void giveAnswer();
 	void selectParsing(std::string data);
 	int parseString(std::string data, std::string delimiter);
-	void checkList(long long int value);
 	bool testPrime(long long int value);
 	void deletaAllLists();
 	int K = 0;
