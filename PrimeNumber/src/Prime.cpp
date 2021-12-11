@@ -164,6 +164,8 @@ void Prime::giveAnswer()
 this->deletaAllLists();
 }
 
+
+
 void Prime::deletaAllLists()
 {
 	this->testdata.erase(this->testdata.begin(),this->testdata.end());
@@ -176,7 +178,10 @@ bool Prime::testPrime(long long int value)
 {
 	bool answer = true;
 	/*test from list*/
-
+	if ((value & (1 << 0)) == 0 )
+	{
+		return false;
+	}
 
 	    if (value == 0 || value == 1) {
 	        return false;
