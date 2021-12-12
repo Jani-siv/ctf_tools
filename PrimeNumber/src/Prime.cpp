@@ -280,7 +280,7 @@ std::ofstream fd("primeNum.log", std::ios::app);
 		}
 	}
 	fd.close();
-	std::ofstream fd1("NotprimeNum.log", std::ios::app);
+/*	std::ofstream fd1("NotprimeNum.log", std::ios::app);
 
 		for (auto i = this->notprime.begin(); i != this->notprime.end(); i++)
 		{
@@ -293,7 +293,7 @@ std::ofstream fd("primeNum.log", std::ios::app);
 				this->savedNotPri.push_back(temp);
 			}
 		}
-		fd1.close();
+		fd1.close();*/
 
 
 	std::cout<<"last run found: "<<this->found<<" prime numbers from file"<<std::endl;
@@ -315,6 +315,10 @@ this->totalCalc++;
 			this->found++;
 			return true;
 			}
+		if (value > 1499041 && value < 5000000)
+				{
+			return false;
+				}
 		}
 
 	auto it1 = std::find(this->savedNotPri.begin(), this->savedNotPri.end(),value);
